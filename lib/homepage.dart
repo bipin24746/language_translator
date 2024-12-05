@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:language_translator/selectLanguage.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -18,6 +19,7 @@ class _HomepageState extends State<Homepage> {
         MediaQuery.of(context).padding.top;
 
     return Scaffold(
+      backgroundColor: Colors.grey,
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -42,62 +44,118 @@ class _HomepageState extends State<Homepage> {
                 margin: const EdgeInsets.all(8.0),
                 color: Colors.white,
                 padding: const EdgeInsets.all(8.0),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Enter text to translate",
-                  ),
-                  maxLines: null,
-                  expands: true, // Allows the TextField to fill its parent
+                child: Column(
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed('/language');
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.arrow_downward,
+                            color: Colors.blue,
+                          ),
+                          Text(
+                            "English",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Expanded(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Tap to enter text",
+                        ),
+                        maxLines: null,
+                        expands:
+                            true, // Allows the TextField to fill its parent
+                      ),
+                    ),
+                  ],
                 ),
               ),
               // Bottom section
               Container(
-                height: availableHeight * 0.5 - 30, // Same as top section
+                height: availableHeight * 0.5 -
+                    30, // Half of the height minus spacing
                 margin: const EdgeInsets.all(8.0),
                 color: Colors.white,
-                child: const Center(
-                  child: Text(
-                    "Bottom Half",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed('/language');
+                      },
+                      child: Row(
+                        children: const [
+                          Icon(
+                            Icons.arrow_downward,
+                            color: Colors.blue,
+                          ),
+                          Text(
+                            "English",
+                            style: TextStyle(
+                                color: Colors.blue,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20),
+                          )
+                        ],
+                      ),
+                    ),
+                    const Expanded(
+                      child: DecoratedBox(
+                        decoration: BoxDecoration(),
+                        child: Text(
+                          "Translation",
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.grey,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Positioned(
-                top: availableHeight * 0.6 - 110, // Adjust as needed
-                child: FloatingActionButton(
+          Positioned(
+            top: availableHeight * 0.5 -
+                40, // Center the FAB between the two sections
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
                   onPressed: () {},
                   backgroundColor: Colors.blue,
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_right,
                     color: Colors.white,
                   ),
                 ),
-              ),
-              SizedBox(
-                width: 20,
-              ),
-              Positioned(
-                top: availableHeight * 0.6 - 110, // Adjust as needed
-                child: FloatingActionButton(
+                const SizedBox(width: 20),
+                FloatingActionButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50)),
                   onPressed: () {},
                   backgroundColor: Colors.blue,
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_upward,
                     color: Colors.white,
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -107,7 +165,7 @@ class _HomepageState extends State<Homepage> {
           alignment: Alignment.center,
           child: const Text(
             "Reserved Ad Unit Space",
-            style: TextStyle(fontSize: 16),
+            style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
           ),
         ),
       ),
